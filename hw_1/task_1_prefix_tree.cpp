@@ -33,3 +33,12 @@ Prefiksno drvo: Autocorrect [1.5 poen]
             mleko
             sed red
 */
+
+#include<iostream>
+
+int main(){
+    
+    std::cout << "Hello :D" << std::endl;
+    
+    return 0;
+}
