@@ -53,12 +53,9 @@ namespace my{
             void insert(std::string t){
                 TrieNode* t_node = this;
                 for(char it : t){
-                    if(t_node->children.contains(it)){
-                        t_node = t_node->children[it];
-                    } else {
+                    if(!t_node->children.contains(it))
                         t_node->children.emplace(it, new TrieNode());
-                        t_node = t_node->children[it];
-                    }
+                    t_node = t_node->children[it];
                 }
                 t_node->indicator = true;
             }
@@ -72,14 +69,13 @@ namespace my{
                 TrieNode* t_node = this;
                 bool t_indicator = true;
                 for(char it : t){
-                    if(t_node->children.contains(it)){
-                        t_node = t_node->children[it];
-                    } else {
+                    if(!t_node->children.contains(it)){
                         t_indicator = false;
                         break;
                     }
+                    t_node = t_node->children[it];
                 }
-                if(t_indicator)
+                if(t_indicator && t_node->indicator)
                     return;
                 std::string prefix, suffix;
                 for(int i=0; i<t.length(); i++){
@@ -88,12 +84,11 @@ namespace my{
                     prefix = t.substr(0, i);
                     suffix = t.substr(i+1, t.length()-i-1);
                     for(char it : prefix){
-                        if(t_node->children.contains(it)){
-                            t_node = t_node->children[it];
-                        } else {
+                        if(!t_node->children.contains(it)){
                             t_indicator = false;
                             break;
                         }
+                        t_node = t_node->children[it];
                     }
                     if(!t_indicator)
                         break;  // break umesto conitnue, jer ako jedan prefix ne poklopim necu moci ni naredni (duzi)
@@ -101,14 +96,13 @@ namespace my{
                         t_indicator = true;
                         TrieNode* tt_node = child.second;
                         for(char it : suffix){
-                            if(tt_node->children.contains(it)){
-                                tt_node = tt_node->children[it];
-                            } else {
+                            if(!tt_node->children.contains(it)){
                                 t_indicator = false;
                                 break;
                             }
+                            tt_node = tt_node->children[it];
                         }
-                        if(t_indicator)
+                        if(t_indicator && tt_node->indicator)
                             std::cout << prefix + child.first + suffix + " ";
                     }
                 }
@@ -139,7 +133,7 @@ int main(){
     std::queue<std::string> que;
     for(int i=0; i<m; i++){
         std::cin >> t;
-        que.emplace(t);
+        que.push(t);
     }
     
     for(int i=0; i<m; i++){
