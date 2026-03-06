@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"name": "my_daa_homework",
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"iostream": "cpp"
+		}
+	}
+}
