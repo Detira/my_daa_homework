@@ -28,7 +28,7 @@ namespace my{
             
             void add_edge(int x, int y){
                 if(neighbours.size() <= x || neighbours.size() <= y){
-                    std::cout << "Provided vertexes don't exist." << std::endl;
+                    std::cout << "Provided vertices don't exist." << std::endl;
                     return;
                 }
                 
