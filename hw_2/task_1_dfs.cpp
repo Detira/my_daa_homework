@@ -70,7 +70,7 @@ namespace my{
                 }
             }
             
-            int dfs_planinarenje(const std::vector<std::vector<int>> &mountain, const int &n){
+            int dfs_planinarenje(const std::vector<std::vector<int>> &mountain, int n){
                 std::vector<bool> visited(neighbours.size());
                 
                 std::stack<std::pair<int, bool>> s;
@@ -111,7 +111,7 @@ namespace my{
             }
         
         private:
-            bool directed = false;
+            bool directed;
             std::vector<std::vector<int>> neighbours;
     };
 }
